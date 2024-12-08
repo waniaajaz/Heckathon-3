@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Define custom fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Root Variables for Light and Dark Themes */
+:root {
+  --foreground-rgb: 0, 0, 0; /* Default: Black text */
+  --background-start-rgb: 245, 245, 245; /* Light background */
+  --background-end-rgb: 255, 255, 255; /* Light gradient */
+  --primary: 0 0% 0%; /* Changed primary to black */
+  --secondary: 0 0% 20%; /* Changed secondary to a darker gray */
+}
+
+.dark {
+  --foreground-rgb: 255, 255, 255; /* Dark theme: White text */
+  --background-start-rgb: 28, 28, 28; /* Dark background */
+  --background-end-rgb: 36, 36, 36; /* Dark gradient */
+  --primary: 0 0% 100%; /* Changed primary to white for dark mode */
+  --secondary: 0 0% 60%; /* Changed secondary to a lighter gray */
+}
+
+/* Custom Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes textScale {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes colorFade {
+  from {
+    color: hsl(var(--secondary));
+  }
+  to {
+    color: hsl(var(--primary));
+  }
+}
+
+/* Custom Utilities */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .hover-scale {
+    transition: transform 0.3s ease;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+
+  .button-gradient {
+    background: linear-gradient(to right, black, black); /* Changed to black */
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .button-gradient:hover {
+    transform: scale(1.1);
+    background: linear-gradient(to right, black, black); /* Changed to black */
+  }
+
+  .fade-in {
+    animation: fadeIn 1s ease-out;
+  }
+
+  .zoom-in {
+    animation: zoomIn 0.8s ease-in-out;
+  }
+
+  .text-scale {
+    animation: textScale 0.8s ease-out;
+  }
+
+  .color-fade {
+    animation: colorFade 0.8s ease-in-out;
+  }
+}
+
+/* Base Styles */
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+
+  body {
+    @apply bg-gradient-to-r from-[rgb(var(--background-start-rgb))] to-[rgb(var(--background-end-rgb))] text-[rgb(var(--foreground-rgb))];
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    animation: fadeIn 1.2s ease-out;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    animation: textScale 0.8s ease-out;
+  }
+
+  a {
+    color: hsl(var(--primary)); /* Now black */
+    transition: color 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    animation: colorFade 1s ease-out;
+  }
+
+  a:hover {
+    color: hsl(var(--secondary)); /* Darker gray on hover */
+    transform: scale(1.1);
+  }
+
+  button {
+    @apply button-gradient;
+    font-family: 'Inter', sans-serif;
+    animation: zoomIn 0.8s ease-in-out;
+  }
+
+  /* Apply text-white-title class for specific sections */
+  .new-arrivals-title,
+  .top-selling-title {
+    color: black; /* Changed to black */
+    font-family: 'Inter', sans-serif;
+    animation: textScale 0.8s ease-out;
+  }
+
+  * {
+    @apply border-border;
+    font-family: 'Inter', sans-serif; /* Apply Inter globally */
+  }
+}
